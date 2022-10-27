@@ -5,6 +5,16 @@ class FetchingDataState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('FetchingDataState');
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Container(
+            padding: const EdgeInsets.all(20),
+            child: const CircularProgressIndicator(
+              strokeWidth: 10,
+            )),
+        const Text('Fetching data...')
+      ],
+    );
   }
 }
