@@ -21,3 +21,9 @@ const kValueTextStyle = TextStyle(
   fontSize: 20.0,
   fontWeight: FontWeight.w300,
 );
+
+const kSourceTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 20.0,
+  fontWeight: FontWeight.bold,
+);

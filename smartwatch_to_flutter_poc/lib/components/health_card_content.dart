@@ -8,11 +8,13 @@ class HealthCardContent extends StatelessWidget {
       {super.key,
       required this.icon,
       required this.label,
-      required this.value});
+      required this.value,
+      required this.source});
 
   final IconData icon;
   final health_data_types label;
   final String value;
+  final String source;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class HealthCardContent extends StatelessWidget {
           height: 15.0,
         ),
         Text(value, style: kValueTextStyle),
+        Text(source, style: kSourceTextStyle),
       ],
     );
   }

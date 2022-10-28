@@ -30,7 +30,8 @@ class DataReadyState extends StatelessWidget {
                   cardChild: HealthCardContent(
                       icon: Icons.monitor_heart,
                       label: health_data_types.heartrate,
-                      value: heartrate.toString()),
+                      value: heartrate.toString(),
+                      source: 'Heartrate Monitor'),
                 ),
               ),
               Expanded(
@@ -38,7 +39,8 @@ class DataReadyState extends StatelessWidget {
                   cardChild: HealthCardContent(
                       icon: Icons.abc,
                       label: health_data_types.steps,
-                      value: steps.toString()),
+                      value: steps.toString(),
+                      source: 'Apple watch 6'),
                 ),
               ),
             ],
@@ -49,7 +51,8 @@ class DataReadyState extends StatelessWidget {
             cardChild: HealthCardContent(
                 icon: Icons.bloodtype,
                 label: health_data_types.spO2,
-                value: bloodOxygen.toString()),
+                value: bloodOxygen.toString(),
+                source: 'MySource'),
           ),
         )
       ],

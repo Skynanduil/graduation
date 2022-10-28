@@ -26,11 +26,6 @@ class _HealthPageState extends State<HealthPage> {
   final _stateManager = <AppState, Widget>{
     AppState.DATA_NOT_FETCHED: const DataNotFetchedState(),
     AppState.FETCHING_DATA: const FetchingDataState(),
-    AppState.DATA_READY: DataReadyState(
-      steps: 20,
-      heartrate: 20,
-      bloodOxygen: 20,
-    ),
     AppState.NO_DATA: const NoDataState(),
   };
 
@@ -42,14 +37,14 @@ class _HealthPageState extends State<HealthPage> {
     });
     final types = [
       HealthDataType.STEPS,
-      //HealthDataType.BLOOD_OXYGEN,
-      //HealthDataType.HEART_RATE,
+      HealthDataType.BLOOD_OXYGEN,
+      HealthDataType.HEART_RATE,
     ];
 
     final permissions = [
       HealthDataAccess.READ,
-      //HealthDataAccess.READ,
-      //HealthDataAccess.READ,
+      HealthDataAccess.READ,
+      HealthDataAccess.READ,
     ];
 
     final now = DateTime.now();
@@ -77,8 +72,16 @@ class _HealthPageState extends State<HealthPage> {
       }
 
       setState(() {
-        _state =
-            _healthDataList.isEmpty ? AppState.NO_DATA : AppState.DATA_READY;
+        if (_healthDataList.isNotEmpty) {
+          _stateManager[AppState.DATA_READY] = DataReadyState(
+            steps: getSteps(), //TODO: Get actual steps
+            heartrate: 20, //TODO: Get actual heartrate
+            bloodOxygen: 20, //TODO: Get actual spo2
+          );
+          _state = AppState.DATA_READY;
+        } else {
+          _state = AppState.NO_DATA;
+        }
       });
     } else {
       print("Authorization not granted");
