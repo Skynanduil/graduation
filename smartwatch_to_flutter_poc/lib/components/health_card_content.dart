@@ -19,12 +19,16 @@ class HealthCardContent extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, size: kIconSize),
+        Icon(
+          icon,
+          size: kIconSize,
+          color: kIconColor,
+        ),
         const SizedBox(
           height: 15.0,
         ),
         Text(
-          label.toString(),
+          label.name,
           style: kLabelTextStyle,
         ),
         const SizedBox(

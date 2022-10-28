@@ -19,13 +19,19 @@ class _HealthPageState extends State<HealthPage> {
   final String appBarTitle = 'Health';
 
   List<HealthDataPoint> _healthDataList = [];
-  AppState _state = AppState.DATA_NOT_FETCHED;
+  AppState _state = AppState.DATA_READY;
 
-  var _stateManager = <AppState, Widget>{
-    AppState.DATA_NOT_FETCHED: DataNotFetchedState(),
-    AppState.FETCHING_DATA: FetchingDataState(),
-    AppState.DATA_READY: DataReadyState(),
-    AppState.NO_DATA: NoDataState(),
+  int getSteps() => 20;
+
+  final _stateManager = <AppState, Widget>{
+    AppState.DATA_NOT_FETCHED: const DataNotFetchedState(),
+    AppState.FETCHING_DATA: const FetchingDataState(),
+    AppState.DATA_READY: DataReadyState(
+      steps: 20,
+      heartrate: 20,
+      bloodOxygen: 20,
+    ),
+    AppState.NO_DATA: const NoDataState(),
   };
 
   HealthFactory health = HealthFactory();

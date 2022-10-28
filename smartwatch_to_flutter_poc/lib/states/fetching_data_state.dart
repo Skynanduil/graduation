@@ -7,13 +7,17 @@ class FetchingDataState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
             padding: const EdgeInsets.all(20),
             child: const CircularProgressIndicator(
               strokeWidth: 10,
             )),
-        const Text('Fetching data...')
+        const Text('Fetching data...'),
+        const SizedBox(
+          width: double.infinity,
+        ),
       ],
     );
   }
