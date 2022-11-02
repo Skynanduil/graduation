@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // ICON
@@ -12,7 +11,7 @@ const Color kCardColor = Color.fromRGBO(129, 199, 132, 1);
 
 const kLabelTextStyle = TextStyle(
   color: Colors.white,
-  fontSize: 40.0,
+  fontSize: 25.0,
   fontWeight: FontWeight.bold,
 );
 

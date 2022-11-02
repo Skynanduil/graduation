@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:health/health.dart';
+import 'package:smartwatch_to_flutter_poc/models/health_data.dart';
 
 import '../components/health_card.dart';
 import '../components/health_card_content.dart';
-import '../enums/health_data_types.dart';
 
 class DataReadyState extends StatelessWidget {
-  const DataReadyState(
-      {super.key,
-      required this.steps,
-      required this.bloodOxygen,
-      required this.heartrate});
+  const DataReadyState({
+    super.key,
+    required this.stepData,
+    required this.bloodOxygenData,
+    required this.heartrateData,
+  });
 
-  final int steps;
-  final int bloodOxygen;
-  final int heartrate;
+  final List<HealthData> stepData;
+  final List<HealthData> bloodOxygenData;
+  final List<HealthData> heartrateData;
 
   @override
   Widget build(BuildContext context) {
-    print(health_data_types.heartrate.toString());
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -28,19 +28,38 @@ class DataReadyState extends StatelessWidget {
               Expanded(
                 child: HealthCard(
                   cardChild: HealthCardContent(
-                      icon: Icons.monitor_heart,
-                      label: health_data_types.heartrate,
-                      value: heartrate.toString(),
-                      source: 'Heartrate Monitor'),
+                    icon: Icons.monitor_heart,
+                    label: 'Heartrate',
+                    value: (heartrateData.fold(
+                              0,
+                              (previousValue, element) =>
+                                  previousValue +
+                                  (element.value as NumericHealthValue)
+                                      .numericValue
+                                      .toInt(),
+                            ) /
+                            heartrateData.length)
+                        .toString(),
+                    source:
+                        heartrateData.map((e) => e.source).toSet().toString(),
+                  ),
                 ),
               ),
               Expanded(
                 child: HealthCard(
                   cardChild: HealthCardContent(
                       icon: Icons.abc,
-                      label: health_data_types.steps,
-                      value: steps.toString(),
-                      source: 'Apple watch 6'),
+                      label: 'Steps',
+                      value: stepData
+                          .fold(
+                              0,
+                              (previousValue, element) =>
+                                  previousValue +
+                                  (element.value as NumericHealthValue)
+                                      .numericValue
+                                      .toInt())
+                          .toString(),
+                      source: stepData.map((e) => e.source).toSet().toString()),
                 ),
               ),
             ],
@@ -49,12 +68,22 @@ class DataReadyState extends StatelessWidget {
         Expanded(
           child: HealthCard(
             cardChild: HealthCardContent(
-                icon: Icons.bloodtype,
-                label: health_data_types.spO2,
-                value: bloodOxygen.toString(),
-                source: 'MySource'),
+              icon: Icons.bloodtype,
+              label: 'Blood Oxygen',
+              value: (bloodOxygenData.fold(
+                        0.0,
+                        (previousValue, element) =>
+                            previousValue +
+                            (element.value as NumericHealthValue)
+                                .numericValue
+                                .toDouble(),
+                      ) /
+                      bloodOxygenData.length)
+                  .toString(),
+              source: bloodOxygenData.map((e) => e.source).toSet().toString(),
+            ),
           ),
-        )
+        ),
       ],
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
-import '../enums/health_data_types.dart';
 
 class HealthCardContent extends StatelessWidget {
   const HealthCardContent(
@@ -12,7 +11,7 @@ class HealthCardContent extends StatelessWidget {
       required this.source});
 
   final IconData icon;
-  final health_data_types label;
+  final String label;
   final String value;
   final String source;
 
@@ -30,7 +29,7 @@ class HealthCardContent extends StatelessWidget {
           height: 15.0,
         ),
         Text(
-          label.name,
+          label,
           style: kLabelTextStyle,
         ),
         const SizedBox(
